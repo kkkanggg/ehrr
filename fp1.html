@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equi="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fp1.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Patient's Billings and Finances</title>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+                // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <div class="section-title">
+        <div class="back-btn">
+            <a href="f.html">
+                <img src="las.png" alt="las">
+            </a>
+        </div>
+        <h1 class="ch">PATIENT'S BILLINGS AND FINANCES</h1>
+    </div>
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard" id="searchable-content">
+            <div class="data-one">
+                <div class="sec1">
+                    <div class="obj1">
+                        <img src="p1.png" alt="p1">
+                    </div>
+                    <div class="obj2">
+                        <span>Magsaysay, Theodore P.</span>
+                    </div>
+                </div>
+
+                <div class="sec2">
+                    <div class="d1">
+                        <div class="prof1">
+                            <p class="dp1">Gender</p>
+                            <p class="dp2">Male</p>
+                        </div>
+                        <div class="prof1">
+                            <p class="dp1">Religion</p>
+                            <p class="dp2">Roman Catholic</p>
+                        </div>
+                        <div class="prof1">
+                            <p class="dp1">Civil Status</p>
+                            <p class="dp2">Single</p>
+                        </div>
+                        <div class="prof1">
+                            <p class="dp1">Citizenship</p>
+                            <p class="dp2">Filipino</p>
+                        </div>
+                    </div>
+
+                    <div class="d2">
+                        <div class="prof1">
+                            <p class="dp1">Birthdate</p>
+                            <p class="dp2">09/26/2000</p>
+                        </div>
+                        <div class="prof1">
+                            <p class="dp1">Place of Birth</p>
+                            <p class="dp2">Makati City</p>
+                        </div>
+                        <div class="prof1">
+                            <p class="dp1">Contact#</p>
+                            <p class="dp2">+639000</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="data-two">
+
+                <div class="placement">
+                    <div class="main-content1">
+                        <div class="d-1">
+                            <div class="d-title">
+                                <p class="dt">BILL TO:</p>
+                            </div>
+                            <div class="d-content">
+                                <p class="dc">Magsaysay, Theodore P.</p>
+                            </div>
+                        </div>
+                        <div class="d-1">
+                            <div class="d-title">
+                                <p class="dt">ADDRESS:</p>
+                            </div>
+                            <div class="d-content">
+                                <p class="dc">5th Floor, Building ABC, Lot 1, Block 4, Papaya Street, AAA Subdivision, Barangay 000, Makati City, 000</p>
+                            </div>
+                        </div>
+                        <div class="d-1">
+                            <div class="d-title">
+                                <p class="dt">INVOICE#</p>
+                            </div>
+                            <div class="d-content">
+                                <p class="dc">000000</p>
+                            </div>
+                        </div>
+                        <div class="d-1">
+                            <div class="d-title">
+                                <p class="dt">DATE</p>
+                            </div>
+                            <div class="d-content">
+                                <p class="dc">03/25/2025</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="horizontal-line"></div>
+    
+                    <div class="main-content2">
+                        <div class="format1">
+                            <div class="section1">
+                                <p class="stn">ITEMS</p>
+                            </div>
+                            <div class="section1">
+                                <p class="stn">DESCRIPTION</p>
+                            </div>
+                        </div>
+                        <div class="format2">
+                            <div class="section2">
+                                <p class="stn2">QTY</p>
+                                <p class="stn2">PRICE</p>
+                                <p class="stn2">TAX</p>
+                                <p class="stn2">TOTAL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="main-content3">
+                        <div class="start">
+                            <p class="note">NOTES</p>
+                        </div>
+    
+                        <div class="vertical-line"></div>
+    
+                        <div class="end">
+                            <div class="inner-end">
+                                <p class="total">TOTAL</p>
+                                <p class="amount" style="color: black;">P0000000.00</p>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

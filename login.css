@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://scontent.fmnl17-2.fna.fbcdn.net/v/t1.15752-9/484930139_1043697974252337_646037875466939376_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=eYS26LYCpUAQ7kNvgHYiInJ&_nc_oc=AdmtpuYJDN6oXq_ZT-hkfzg9t_tq5lLzYZxanidWudZ9zcesBF9v57m1OavGXpXTnV8&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&oh=03_Q7cD1wFIavjO1tDYu_ty7I6YQuA2GBQuzxQ9XlaoojZ88l8bVw&oe=6804D97F');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.login-container {
+    padding: 20px 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img {
+    width: 140px; 
+    height: 140px;
+    border-radius: 50%; 
+    margin-bottom: 15px;
+    object-fit: cover; 
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    background-color: transparent;
+    border-radius: 30px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    outline: none;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+button {
+    width: 200px;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: black;
+    transition: background-color 0.3s;
+    outline: none;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    display: none;
+}

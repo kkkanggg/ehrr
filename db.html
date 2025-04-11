@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="db.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Dashboard</title>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <h1 class="db">DASHBOARD</h1>
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard" id="searchable-content">
+          <div class="container-grid1">
+            <a href="dbd1.html">
+                <div class="data-one">
+                    <div class="image-icon">
+                        <span class="image1">
+                            <img src="p1.png" alt="p1">
+                        </span>
+                        <div class="data1">
+                            <span class="name">Magsaysay, Theodore P.</span>
+                            <text class="patient-number">00104092025</text>
+                            <span class="age">25 YRS OLD</span>
+                            <span class="year">09/26/2000</span>
+                        </div>
+                    </div>
+    
+                        <div class="status">
+                            <div class="s1">
+                                <i class='bx bxs-droplet icon' style="font-size: 35px"></i>
+                                <div class="o1">
+                                    <span class="bp">Blood Pressure</span>
+                                </div>
+                                <div class="o2">
+                                    <span class="num">150/95 mm HG</span>
+                                </div>
+                                <div class="uo1">
+                                    <i class='bx bxs-error-circle icon' style="font-size: 14px"></i>
+                                    <span class="num">Alarming</span>
+                                </div>
+                            </div>
+                            <div class="vertical-line"></div>
+                            <div class="s2">
+                                <i class='bx bxs-capsule icon' style="font-size: 34px"></i>
+                                <div class="o1">
+                                    <span class="med">Medications</span>
+                                </div>
+                                <div class="o2">
+                                    <span class="amo">Losartan 50 mg Oral tablet</span>
+                                </div>
+                                <div class="uo1">
+                                    <span class="num" style="color: red">22:00</span>
+                                </div>
+                            </div>
+                            <div class="vertical-line"></div>
+                            <div class="s3">
+                                <i class='bx bxs-flask icon' style="font-size: 35px"></i>
+                                <div class="o1">
+                                    <span class="lab">Laboratory</span>
+                                </div>
+                                <div class="o2">
+                                    <span class="kind">CBC</span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </a>
+            
+            <a href="dbd2.html">
+                <div class="data-one">
+                    <div class="image-icon">
+                        <span class="image1">
+                            <img src="p2.png" alt="p1">
+                        </span>
+                        
+                        <div class="data1">
+                            <span class="name">Batumbakal, Eleanor S.</span>
+                            <text class="patient-number">00204092025</text>
+                            <span class="age">45 YRS OLD</span>
+                            <span class="year">05/25/1980</span>
+                        </div>
+                    </div>
+    
+                        <div class="status">
+                            <div class="s1">
+                                <i class='bx bxs-heart icon' style="font-size: 35px"></i>
+                                <div class="o1">
+                                    <span class="bp">Respiratory Rate</span>
+                                </div>
+                                <div class="o2">
+                                    <span class="num">30 bpm</span>
+                                </div>
+                                <div class="uo1">
+                                    <i class='bx bxs-chevrons-up icon' style="font-size: 14px"></i>
+                                    <span class="num">Higher than Average</span>
+                                </div>
+                            </div>
+                        </div>
+              </div>
+            </a>
+      </div>
+        <div class="container-grid2">
+            <div class="to-do">
+                <h1 class="td">TO DO</h1>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

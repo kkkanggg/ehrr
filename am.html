@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equi="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="am.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Appointment</title>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+                // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <div class="section-title">
+        <h1 class="ch">APPOINTMENT</h1>
+    </div>
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard" id="searchable-content">
+        <div class="calendar">
+            <div class="date">
+                <div class="year">
+                    <strong>2025</strong>
+                </div>
+                <div class="month">
+                    <strong>March</strong>
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <th class="weekend">Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th class="weekend">Saturday</th>
+                </tr>
+                <tr>
+                    <td class="b"></td>
+                    <td class="b"></td>
+                    <td class="b"></td>
+                    <td class="b"></td>
+                    <td class="b"></td>
+                    <td class="n"></td>
+                    <td class="we">1</td>
+                </tr>
+                <tr>
+                    <td class="we">2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td class="we">8</td>
+                </tr>
+                <tr>
+                    <td class="we">9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td class="we">15</td>
+                </tr>
+                <tr>
+                    <td class="we">16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td class="we">22</td>
+                </tr>
+                <tr>
+                    <td class="we">23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td class="we">29</td>
+                </tr>
+                <tr>
+                    <td class="we">30</td>
+                    <td class="n">31</td>
+                    <td class="m"></td>
+                    <td class="m"></td>
+                    <td class="m"></td>
+                    <td class="m"></td>
+                    <td class="m"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equi="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="db.css">
+    <link rel="stylesheet" href="demo_pf.css">
+    <link rel="stylesheet" href="demo_sidebar.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Patient Information Form</title>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <div class="section-title2">
+        <div class="back-btn">
+            <a href="c.html">
+                <img src="las.png" alt="las">
+            </a>
+        </div>
+        <h3 style="font-size: 30px;">DEMOGRAPHIC PROFILE</h3>
+        <div class="forward-btn">
+            <a href="cmh.html">
+                <img src="ras.png" alt="ras">
+            </a>
+        </div>
+        <text class="patient-name-title">MAGSAYSAY, THEODORE P.</text>
+    </div>
+    <div class="dashboard">
+    <div class="container" id="searchable-content">
+        <div class="form-container">
+            
+            <div class="content-box">
+                <div class="info-item">
+                    <div class="info-label">MOTHER'S MAIDEN NAME:</div>
+                    <div class="info-value">Puchuchay, Remilia C.</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-label">SPOUSE (IF MARRIED):</div>
+                    <div class="info-value">N/A</div>
+                </div>
+            </div>
+            
+    
+            <div class="section">
+                <div class="section-title" >II. ADDRESS AND CONTACT NUMBERS</div>
+                
+                <div id="addressContent" class="content-box">
+                    <div class="info-item">
+                        <div class="info-label">PERMANENT HOME ADDRESS</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-value">
+                            5th Floor, Building ABC, Lot 1, Block 4, Papaya Street, AAA Subdivision, Barangay 000,<br> Makati City, 000
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="info-item">
+                        <div class="info-label">MAILING ADDRESS</div>
+                        <div class="info-value">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="sameAsAbove" checked>
+                                <label for="sameAsAbove">SAME AS ABOVE</label>
+                            </div>
+                            <div id="mailingAddressField" style="display: none; margin-top: 8px;">
+                                <input type="text" style="width: 100%; padding: 5px;" placeholder="Enter mailing address">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     
+<div class="section emergency-section">
+    <div class="section-title emergency-title" >
+        IN CASE OF EMERGENCY
+    </div>
+
+    <div id="emergencyContent" class="content-box">
+        <div class="info-item">
+            <div class="info-label">EMERGENCY CONTACT:</div>
+            <div class="info-value">Magsaysay, Remilia C.</div>
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">RELATIONSHIP TO THE PATIENT:</div>
+            <div class="info-value">Mother</div>
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">CONTACT #:</div>
+            <div class="info-value">+63900000</div>
+        </div>
+    </div>
+</div>
+            <div class="section">
+                <div class="section-title" >II. INSURANCE INFORMATION</div>
+                
+                <div id="insuranceContent" class="content-box">
+                    <div class="info-label">PHILHEALTH NUMBER</div>
+            <div class="info-value">22-096247619-7</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar1">
+            <div class="photo-container">
+                <img src="p1.png" alt="Patient Photo" class="profile-photo">
+                <h2 class="patient-name">
+                    <a href="med_his.html" class="name-link">
+                        Magsaysay,<br> Theodore P.
+                    </a>
+                </h2>
+                
+            </div>
+        
+            <div class="patient-info-container">
+                <div class="patient-info-column">
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Gender</div>
+                        <div class="patient-info-value">Male</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Religion</div>
+                        <div class="patient-info-value">Roman Catholic</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Civil Status</div>
+                        <div class="patient-info-value">Single</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Citizenship</div>
+                        <div class="patient-info-value">Filipino</div>
+                    </div>
+                </div>
+            
+                <div class="patient-info-column">
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Birthdate</div>
+                        <div class="patient-info-value">09/26/2000</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Place of Birth</div>
+                        <div class="patient-info-value">Makati City</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Contact #</div>
+                        <div class="patient-info-value">+6390000</div>
+                    </div>
+                </div>
+            </div>            
+<body>
+
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

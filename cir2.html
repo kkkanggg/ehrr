@@ -1,0 +1,328 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider's Notes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="db.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --body-color: #E4E9f7;
+            --sidebar-color: #FFF;
+            --primary-color: #695CFE;
+            --primary-color-light: #F6F5FF;
+            --toggle-color: #DDD;
+            --text-color: #707070;
+            --base-color: #205781;
+            --dash-color: #f7f6f2;
+
+            --tran-02: all 0.2s ease;
+            --tran-03: all 0.3s ease;
+            --tran-04: all 0.4s ease;
+            --tran-05: all 0.5s ease;
+        }
+
+        body {
+            height: 100vh;
+            background: var(--base-color);
+        }
+
+        .dashboard {
+            position: fixed;
+            display: inline-flex;
+            border-radius: 20px;
+            top: 60px;
+            height: 880px;
+            left: 300px;
+            right: 100px;
+            width: 85%;
+            padding: 15px 20px;
+            background: var(--dash-color);
+            z-index: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 16px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+            margin-bottom: 16px;
+            width: 275%;
+        }
+
+        .card h2 {
+            color: #1e3a8a;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .card div {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card span {
+            font-weight: bold;
+            color: #4b5563;
+            margin-right: 8px;
+        }
+
+        .card input[type="text"] {
+            border: 1px solid #9ca3af;
+            border-radius: 4px;
+            padding: 4px 8px;
+            width: 350px; 
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group span {
+            font-weight: bold;
+            color: #4b5563;
+            margin-right: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+
+        .remarks {
+            display: flex;
+            align-items: center;
+            margin-left: 16px;
+        }
+
+        .remarks span {
+            font-weight: bold;
+            color: #4b5563; 
+            margin-right: 8px;
+        }
+
+        .remarks input[type="text"] {
+            border: 1px solid #9ca3af;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-left: 8px; 
+            width: 200px; 
+        }
+
+        .section-title{
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            align-items: center;
+            top: 1%;
+            margin-left: 16%;
+            gap: 10px;
+            color: var(--dash-color);
+        }
+
+        .back-btn img{
+            width: 20px;
+         }
+
+        .forward-btn img{
+            width: 20px;
+        }
+
+        .patient-name{
+            font-size: 25px;
+            margin-left: 797px;
+            color: var(--dash-color);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-title">
+        <div class="back-btn">
+            <a href="cir.html">
+                <img src="las.png" alt="las">
+            </a>
+        </div>
+        <h2 style="font-size: 30px;">IMMUNIZATION RECORD</h2>
+        <div class="forward-btn">
+            <a href="chh.html">
+                <img src="ras.png" alt="ras">
+            </a>
+        </div>
+        <text class="patient-name">MAGSAYSAY, THEODORE P.</text>
+    </div>
+    <div class="dashboard" id="searchable-content">
+        <div class="container">
+            <div class="card">
+                <h2>PROVIDER'S NOTES</h2>
+                <div>
+                    <span>PHYSICIAN/ NURSE:</span>
+                    <input type="text" placeholder="Enter name">
+                </div>
+                <div>
+                    <span>FACILITY:</span>
+                    <input type="text" placeholder="Enter facility">
+                </div>
+                <div>
+                    <span>RECOMMENDATION:</span>
+                    <input type="text" placeholder="Enter recommendation">
+                </div>
+                <div class="checkbox-group">
+                    <span>ADVERSE REACTION OBSERVED:</span>
+                    <input type="checkbox">
+                    <span>NONE</span>
+                    <input type="checkbox">
+                    <span>HAVE</span>
+                    <div class="remarks">
+                        <span>REMARKS:</span>
+                        <input type="text" placeholder="type here">
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>SYSTEM NOTES</h2>
+                <div>
+                    <span>UPDATED BY:</span>
+                </div>
+                <div>
+                    <span>LAST UPDATED</span>
+                    <span>03/19/2025</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+   
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <script src="script.js"></script>
+
+</body>
+</html>

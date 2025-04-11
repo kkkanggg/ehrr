@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="stylesheet" href="physical_assess.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="db.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Physical Assessment</title>
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="section-title">
+                <div class="back-btn">
+                    <a href="chh.html">
+                        <img src="las.png" alt="las">
+                    </a>
+                </div>
+                <h2 style="font-size: 30px;">PHYSICAL ASSESSMENT</h2>
+                <div class="forward-btn">
+                    <a href="chhpa.html">
+                        <img src="ras.png" alt="ras">
+                    </a>
+                </div>
+            </div>
+        </div>
+      
+        <div class="content">
+            <div class="buttons">
+                <button><a href="general_app.html" style="text-decoration: none; color: inherit;">GENERAL (APPEARANCE &amp; OVERALL CONDITION)</a></button>
+                <button><a href="hair.html" style="text-decoration: none; color: inherit;">SKIN, HAIR AND NAILS</a></button>
+                <button><a href="headneck.html" style="text-decoration: none; color: inherit;">HEAD AND NECK</a></button>
+                <button><a href="ices.html" style="text-decoration: none; color: inherit;">EYES</a></button>
+                <button><a href="ent.html" style="text-decoration: none; color: inherit;">EARS, NOSE, THROAT (ENT)</a></button>
+                <button><a href="cardio.html" style="text-decoration: none; color: inherit;">CARDIOVASCULAR</a></button>
+                <button><a href="respiratory.html" style="text-decoration: none; color: inherit;">RESPIRATORY</a></button>
+            </div>
+            <div class="image-container">
+                <img src="body.png" alt="Human body with internal organs illustration"/>
+            </div>
+            
+            <div class="buttons">
+                <button><a href="gastro.html" style="text-decoration: none; color: inherit;">GASTROINTESTINAL</a></button>
+                <button><a href="genital.html" style="text-decoration: none; color: inherit;">GENITOURINARY</a></button>
+                <button><a href="musco.html" style="text-decoration: none; color: inherit;">MUSCULOSKELETAL</a></button>
+                <button><a href="neuro.html" style="text-decoration: none; color: inherit;">NEUROLOGICAL</a></button>
+                <button><a href="endocrine.html" style="text-decoration: none; color: inherit;">ENDOCRINE</a></button>
+                <button><a href="hema.html" style="text-decoration: none; color: inherit;">HEMATOLOGIC/LYMPHATIC</a></button>
+                <button><a href="psych.html" style="text-decoration: none; color: inherit;">PSYCHIATRIC</a></button>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

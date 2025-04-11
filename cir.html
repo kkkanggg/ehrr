@@ -1,0 +1,446 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="db.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --body-color: #E4E9f7;
+            --sidebar-color: #FFF;
+            --primary-color: #695CFE;
+            --primary-color-light: #F6F5FF;
+            --toggle-color: #DDD;
+            --text-color: #707070;
+            --base-color: #205781;
+            --dash-color: #f7f6f2;
+
+            --tran-02: all 0.2s ease;
+            --tran-03: all 0.3s ease;
+            --tran-04: all 0.4s ease;
+            --tran-05: all 0.5s ease;
+        }
+
+        body {
+            height: 100vh;
+            background: var(--base-color);
+        }
+
+        .dashboard {
+            position: fixed;
+            display: inline-flex;
+            border-radius: 20px;
+            top: 60px;
+            height: 880px;
+            left: 300px;
+            right: 100px;
+            width: 85%;
+            padding: 15px 20px;
+            background: var(--dash-color);
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .status1 {
+            width: 168%;
+            background: #f3f4f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+        }
+
+        .status1 h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .status1 .flex {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status1 .flex .item {
+            display: flex;
+            align-items: center;
+        }
+
+        .status1 .flex .item .circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status1 .flex .item .circle.red {
+            background: #f56565;
+        }
+
+        .status1 .flex .item .circle.yellow {
+            background: #ecc94b;
+        }
+
+        .status1 .flex .item .circle.green {
+            background: #48bb78;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            width: 168%;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+        }
+
+        table {
+            width: 100%;
+            background: #bee3f8;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding:25px;
+            border-bottom: 2px solid #90cdf4;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        th {
+            background: #90cdf4;
+        }
+
+        td {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        td:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .date-cell {
+            font-weight: normal;
+        }
+
+        .section-title{
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            align-items: center;
+            top: 1%;
+            margin-left: 16%;
+            gap: 10px;
+            color: var(--dash-color);
+        }
+
+        .back-btn img{
+            width: 20px;
+         }
+
+        .forward-btn img{
+            width: 20px;
+        }
+
+        .patient-name{
+            font-size: 25px;
+            margin-left: 797px;
+            color: var(--dash-color);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-title">
+        <div class="back-btn">
+            <a href="cia.html">
+                <img src="las.png" alt="las">
+            </a>
+        </div>
+        <h2 style="font-size: 30px;">IMMUNIZATION RECORD</h2>
+        <div class="forward-btn">
+            <a href="cir2.html">
+                <img src="ras.png" alt="ras">
+            </a>
+        </div>
+        <text class="patient-name">MAGSAYSAY, THEODORE P.</text>
+    </div>
+    <div class="dashboard" id="searchable-content">
+        <div>
+            <div class="status1">
+                <h2>STATUS</h2>
+                <div class="flex">
+                    <div class="item">
+                        <div class="circle red"></div>
+                        <span>Overdue</span>
+                    </div>
+                    <div class="item">
+                        <div class="circle yellow"></div>
+                        <span>Due Soon</span>
+                    </div>
+                    <div class="item">
+                        <div class="circle green"></div>
+                        <span>Up to Date</span>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMMUNIZATION</th>
+                            <th>DATE ADMINISTERED</th>
+                            <th>DOSE</th>
+                            <th>LOT NUMBER</th>
+                            <th>PROVIDER</th>
+                            <th>NEXT DUE DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell">mm/dd/yy</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="date-cell"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.querySelectorAll('.date-cell').forEach(cell => {
+            cell.addEventListener('click', function() {
+                flatpickr(cell, {
+                    onChange: function(selectedDates, dateStr, instance) {
+                        cell.innerText = dateStr;
+                    }
+                }).open();
+            });
+        });
+    </script>
+       <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+   
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <script src="script.js"></script>
+</body>
+</html>
+</body>
+</html>

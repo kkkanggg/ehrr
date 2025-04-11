@@ -1,0 +1,602 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="db.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel="stylesheet">
+    <title>Patient Information Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --body-color: #E4E9f7;
+            --sidebar-color: #FFF;
+            --primary-color: #695CFE;
+            --primary-color-light: #F6F5FF;
+            --toggle-color: #DDD;
+            --text-color: #707070;
+            --base-color: #205781;
+            --dash-color: #f7f6f2;
+
+            --tran-02: all 0.2s ease;
+            --tran-03: all 0.3s ease;
+            --tran-04: all 0.4s ease;
+            --tran-05: all 0.5s ease;
+        }
+
+        body {
+            background-color: #205781;
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            margin: 0;
+            color: #333;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .dashboard {
+            position: fixed;
+            display: flex;
+            border-radius: 20px;
+            top: 60px;
+            height: 880px;
+            left: 300px;
+            right: 100px;
+            width: 85%;
+            padding: 15px 20px;
+            background: var(--dash-color);
+            z-index: 1;
+        }
+
+      
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+
+        .section {
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+            background-color: #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            height: 400px;
+        }
+
+        .section label {
+            display: block;
+            font-weight: bold;
+            color: #4b5563;
+            margin-bottom: 1rem;
+            font-size: 16px;
+        }
+
+        .section p {
+            color: #4b5563;
+            font-size: 16px;
+
+        }
+
+        .section input[type="text"], .section select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .section input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .section .flex {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section .flex span {
+            margin-right: 16px;
+            font-size: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .sidebar1 {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+            border-radius: 10px;
+            padding: 10px;
+            padding-top: 3rem;
+            margin-left: 20px;
+            width: 420px;
+            height: 815px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .patient-name {
+            font-size: 24px;
+        }
+
+        .patient-name a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .patient-info-container {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin: 0;
+        }
+
+        .patient-info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            font-weight: lighter;
+            padding: 25px;
+        }
+
+        .patient-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .patient-info-label {
+            font-size: 14px;
+            font-weight: normal;
+            color: gray;
+        }
+
+        .patient-info-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: black;
+            line-height: 1.5;
+        }
+
+        .enlarged-box {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-title{
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            align-items: center;
+            top: 1%;
+            margin-left: 16%;
+            gap: 10px;
+            color: var(--dash-color);
+        }
+
+        .back-btn img{
+            width: 20px;
+         }
+
+        .forward-btn img{
+            width: 20px;
+        }
+
+        .patient-name-title{
+            font-size: 25px;
+            margin-left: 889px;
+            color: var(--dash-color);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-title">
+        <div class="back-btn">
+            <a href="cdp.html">
+                <img src="las.png" alt="las">
+            </a>
+        </div>
+        <h3 style="font-size: 30px;">MEDICAL HISTORY</h3>
+        <div class="forward-btn">
+            <a href="cia.html">
+                <img src="ras.png" alt="ras">
+            </a>
+        </div>
+        <text class="patient-name-title">MAGSAYSAY, THEODORE P.</text>
+    </div>
+    <div class="dashboard" id="searchable-content">
+        <div class="container">
+            <div class="form-container">
+                <div class="grid">
+                    <!-- Past Medical History -->
+                    <div class="section">
+                        <h2>PAST MEDICAL HISTORY</h2>
+                        <div>
+                            
+                            <label>ILLNESS Hypertension</label>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 12px; margin-top:0px; margin-left: 0px;">
+                              
+
+                                <label style="width: 120px;">SURGERIES</label>
+                                <input type="checkbox" style="position: relative; top: -8px; margin-left:-10px;">
+
+                                <label for="surgery-had">HAD</label>
+                                <input type="checkbox" style="position: relative; top: -8px;">
+
+                                <label for="surgery-none">NONE</label>
+                            </div>
+                            
+                            <div style="margin-top: 2px; margin-left: 0px;">
+                                <label style="display: inline-block; width: 120px; line-height: 1; margin-right: -30px;">Remarks:</label>
+                                <input type="text" placeholder="type here" style="width: 200px; margin-top: 0px; margin-left: 0;">
+                            </div>
+                            
+                            
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 12px; margin-top:0px; margin-left: 0px;">
+                              
+
+                                <label style="width: 120px;">HOSPITALIZATION</label>
+                                <input type="checkbox" style="position: relative; top: -8px;margin-left: 20px;">
+
+                                <label for="surgery-had">HAD</label>
+                                <input type="checkbox" style="position: relative; top: -8px;">
+
+                                <label for="surgery-none">NONE</label>
+                            </div>
+                            <div style="margin-top: 2px; margin-left: 0px;">
+                                <label style="display: inline-block; width: 120px; line-height: 1; margin-right: -30px;">Remarks:</label>
+                                <input type="text" placeholder="type here" style="width: 200px; margin-top: 0px; margin-left: 0;">
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Family History -->
+                    <div class="section">
+                        <h2>FAMILY HISTORY</h2>
+                       
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Heart Disease</label>
+                            <input type="checkbox">
+                        </div>
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Cancer</label>
+                            <input type="checkbox">
+                        </div>
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Diabetes</label>
+                            <input type="checkbox">
+                        </div>
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Hypertension</label>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Asthma</label>
+                            <input type="checkbox">
+                        </div>
+                        <div style="margin-top: 2px; margin-left: 0px; line-height: 1;">
+                            <label style="display: inline-block; width: 120px; line-height: 1;">Others</label>
+                            <input type="text" placeholder="type here" style="width: 175px;">
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Social History -->
+                <div class="section">
+                    <h2>SOCIAL HISTORY</h2>
+                    <div class="grid" style="display: flex; align-items: center;">
+    <div class="flex" style="display: flex; align-items: center; margin-right: 10px;">
+        
+        <span>Smoker</span>
+        <input type="checkbox" id="subscribe" style="margin-left: 65px;">
+        
+    </div>
+    <select name="smoker-frequency" style="margin-right: 10px; width: 200px;">
+        <option value="" disabled selected>How often?</option>
+        <option value="twice-a-day">Twice a day</option>
+        <option value="thrice-a-day">Thrice a day</option>
+        <option value="more-than-three-a-day">More than three times a day</option>
+        <option value="once-a-week">Once a week</option>
+        <option value="twice-a-week">Twice a week</option>
+        <option value="thrice-a-week">Thrice a week</option>
+        <option value="once-a-month">Once a month</option>
+        <option value="more-than-once-a-month">More than once a month</option>
+    </select>
+    <select name="smoker-amount" style=width:200px;">
+        <option value="" disabled selected>Amount</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+</div>
+
+<div class="grid" style="display: flex; align-items: center;">
+    <div class="flex" style="display: flex; align-items: center; margin-right: 10px;">
+       
+        <span>Alcoholic</span>
+        
+<input type="checkbox" id="subscribe" style="margin-left: 50px;">
+
+    </div>
+    <select name="smoker-frequency" style="margin-right: 10px; width: 200px;">
+        <option value="" disabled selected>How often?</option>
+        <option value="twice-a-day">Twice a day</option>
+        <option value="thrice-a-day">Thrice a day</option>
+        <option value="more-than-three-a-day">More than three times a day</option>
+        <option value="once-a-week">Once a week</option>
+        <option value="twice-a-week">Twice a week</option>
+        <option value="thrice-a-week">Thrice a week</option>
+        <option value="once-a-month">Once a month</option>
+        <option value="more-than-once-a-month">More than once a month</option>
+    </select><select name="smoker-amount" style=width:200px;">
+    
+        <option value="" disabled selected>Amount</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+</div>
+<div class="grid" style="display: flex; align-items: center;">
+    <div class="flex" style="display: flex; align-items: center; margin-right: 10px;">
+        
+        <span>Substance use</span>
+        <input type="checkbox">
+    </div>
+    <select name="smoker-frequency" style="margin-right: 10px; width: 200px;">
+        <option value="" disabled selected>How often?</option>
+        <option value="twice-a-day">Twice a day</option>
+        <option value="thrice-a-day">Thrice a day</option>
+        <option value="more-than-three-a-day">More than three times a day</option>
+        <option value="once-a-week">Once a week</option>
+        <option value="twice-a-week">Twice a week</option>
+        <option value="thrice-a-week">Thrice a week</option>
+        <option value="once-a-month">Once a month</option>
+        <option value="more-than-once-a-month">More than once a month</option>
+    </select>
+    <select name="smoker-amount" style=width:200px;">
+        <option value="" disabled selected>Amount</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="sidebar1">
+            <div class="photo-container">
+                <img src="p1.png" alt="Patient Photo" class="profile-photo">
+                <h2 class="patient-name">
+                    <a href="cmh.html" class="name-link">
+                        Magsaysay,<br> Theodore P.
+                    </a>
+                </h2>
+            </div>
+        
+            <div class="patient-info-container">
+                <div class="patient-info-column">
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Gender</div>
+                        <div class="patient-info-value">Male</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Religion</div>
+                        <div class="patient-info-value">Roman Catholic</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Civil Status</div>
+                        <div class="patient-info-value">Single</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Citizenship</div>
+                        <div class="patient-info-value">Filipino</div>
+                    </div>
+                </div>
+            
+                <div class="patient-info-column">
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Birthdate</div>
+                        <div class="patient-info-value">09/26/2000</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Place of Birth</div>
+                        <div class="patient-info-value">Makati City</div>
+                    </div>
+                    <div class="patient-info-item">
+                        <div class="patient-info-label">Contact #</div>
+                        <div class="patient-info-value">+6390000</div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            let username = localStorage.getItem("nurseName");
+    
+            if (username) {
+                document.querySelectorAll(".usernamePlaceholder").forEach(el => {
+                    el.textContent = username;
+                });
+            }
+        };
+
+        // this section handles the search feature
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-box input");
+    const contentContainer = document.getElementById("searchable-content");
+
+    const originalHTML = contentContainer.innerHTML;
+
+    searchInput.addEventListener("input", function () {
+        const searchText = searchInput.value.trim();
+
+        contentContainer.innerHTML = originalHTML;
+
+        if (searchText === "") return;
+
+        const safeSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${safeSearchText})`, "gi");
+
+        highlightMatches(contentContainer, regex);
+    });
+
+    function highlightMatches(element, regex) {
+        const nodes = Array.from(element.childNodes);
+
+        nodes.forEach(node => {
+            if (node.nodeType === 3) {
+                const replaced = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                if (replaced !== node.nodeValue) {
+                    const wrapper = document.createElement("span");
+                    wrapper.innerHTML = replaced;
+                    node.replaceWith(wrapper);
+                }
+            } else if (node.nodeType === 1) {
+                highlightMatches(node, regex);
+            }
+        });
+    }
+});
+    </script>
+</head>
+<body>
+    <nav class = "sidebar close">
+        <header>
+            <a href="home.html" style="text-decoration:none">
+                <div class="image-text">
+                    <span class="image">
+                        <img src="logo.png" alt="logo">
+                    </span>
+    
+                    <div class="text header-text">
+                        <span class="title">EHR</span>
+                        <span class="usernamePlaceholder" style="margin-top: -2px;">Loading...</span>
+                    </div>
+                </div>
+            </a>
+
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="Search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="db.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="c.html">
+                            <i class='bx bx-folder-open icon'></i>
+                            <span class="text nav-text">Charts</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="am.html">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="text nav-text">Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="f.html">
+                            <i class='bx bx-receipt icon'></i>
+                            <span class="text nav-text">Finances</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="login.html">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <script src="script.js"></script>
+
+</body>
+</html>
+</body>
+</html>
